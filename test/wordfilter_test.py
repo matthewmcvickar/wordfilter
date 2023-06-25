@@ -10,31 +10,31 @@ class TestWordfilter:
         self.wordfilter = []
 
     def test_loading(self):
-        assert isinstance(self.wordfilter.blacklist, list)
+        assert isinstance(self.wordfilter.blocklist, list)
 
     def test_badWords(self):
-        assert self.wordfilter.blacklisted(
+        assert self.wordfilter.blocklisted(
             'this string contains the word skank')
-        assert self.wordfilter.blacklisted(
+        assert self.wordfilter.blocklisted(
             'this string contains the word SkAnK')
-        assert self.wordfilter.blacklisted(
+        assert self.wordfilter.blocklisted(
             'this string contains the wordskank')
-        assert self.wordfilter.blacklisted(
+        assert self.wordfilter.blocklisted(
             'this string contains the skankword')
-        assert not self.wordfilter.blacklisted('this string is clean!')
+        assert not self.wordfilter.blocklisted('this string is clean!')
 
     def test_addWords(self):
         self.wordfilter.addWords(['clean'])
-        assert self.wordfilter.blacklisted(
+        assert self.wordfilter.blocklisted(
             'this string contains the word skank')
-        assert self.wordfilter.blacklisted('this string is clean!')
+        assert self.wordfilter.blocklisted('this string is clean!')
 
     def test_removeWord(self):
         # Act
         self.wordfilter.removeWord('crip')
 
         # Assert
-        assert not self.wordfilter.blacklisted('I have a prescription.')
+        assert not self.wordfilter.blocklisted('I have a prescription.')
 
     def test_remove_multiple_added_words(self):
         # Arrange
@@ -45,26 +45,26 @@ class TestWordfilter:
         self.wordfilter.removeWord('crip')
 
         # Assert
-        assert not self.wordfilter.blacklisted('I have a prescription.')
+        assert not self.wordfilter.blocklisted('I have a prescription.')
 
-    def test_remove_unblacklisted_word(self):
+    def test_remove_unblocklisted_word(self):
         # Arrange
         # Make sure no error when removing a word that's not on the list
-        assert not self.wordfilter.blacklisted('this string is clean!')
+        assert not self.wordfilter.blocklisted('this string is clean!')
 
         # Act
         self.wordfilter.removeWord('clean')
 
         # Assert
-        assert not self.wordfilter.blacklisted('this string is clean!')
+        assert not self.wordfilter.blocklisted('this string is clean!')
 
     def test_clearList(self):
         self.wordfilter.clearList()
-        assert not self.wordfilter.blacklisted(
+        assert not self.wordfilter.blocklisted(
             'this string contains the word skank')
 
         self.wordfilter.addWords(['skank'])
-        assert self.wordfilter.blacklisted(
+        assert self.wordfilter.blocklisted(
             'this string contains the word skank')
 
     def test_add_multiple_words(self):
@@ -75,6 +75,6 @@ class TestWordfilter:
         self.wordfilter.addWords(['zebra', 'elephant'])
 
         # Assert
-        assert self.wordfilter.blacklisted('this string has zebra in it')
-        assert self.wordfilter.blacklisted('this string has elephant in it')
-        assert not self.wordfilter.blacklisted('this string has nothing in it')
+        assert self.wordfilter.blocklisted('this string has zebra in it')
+        assert self.wordfilter.blocklisted('this string has elephant in it')
+        assert not self.wordfilter.blocklisted('this string has nothing in it')
