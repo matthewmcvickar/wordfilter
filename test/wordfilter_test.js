@@ -31,35 +31,35 @@ exports['awesome'] = {
     test.expect(6);
     // tests here
     test.equal(typeof(wordfilter), 'object', 'should return an object');
-    test.equal(wordfilter.blacklisted('this string contains the word skank'), true, 'skank should be true');
-    test.equal(wordfilter.blacklisted('this string contains the word SkAnK'), true, 'SkAnK should be true');
-    test.equal(wordfilter.blacklisted('this string contains the wordskank'), true, 'wordskank should be true');
-    test.equal(wordfilter.blacklisted('this string contains the skankword'), true, 'skankword should be true');
-    test.equal(wordfilter.blacklisted('this string is clean!'), false, 'should be false');
+    test.equal(wordfilter.blocklisted('this string contains the word skank'), true, 'skank should be true');
+    test.equal(wordfilter.blocklisted('this string contains the word SkAnK'), true, 'SkAnK should be true');
+    test.equal(wordfilter.blocklisted('this string contains the wordskank'), true, 'wordskank should be true');
+    test.equal(wordfilter.blocklisted('this string contains the skankword'), true, 'skankword should be true');
+    test.equal(wordfilter.blocklisted('this string is clean!'), false, 'should be false');
     test.done();
   },
-  'add a word to blacklist': function(test) {
+  'add a word to blocklist': function(test) {
     wordfilter.addWords(['clean']);
 
     test.expect(1);
-    test.equal(wordfilter.blacklisted('this string was clean!'), true, 'should be true');
+    test.equal(wordfilter.blocklisted('this string was clean!'), true, 'should be true');
     test.done();
   },
-  'remove a single word from blacklist': function(test) {
+  'remove a single word from blocklist': function(test) {
     wordfilter.removeWord('crip');
 
     test.expect(1);
-    test.equal(wordfilter.blacklisted('I have a prescription.'), false, 'should be false');
+    test.equal(wordfilter.blocklisted('I have a prescription.'), false, 'should be false');
     test.done();
   },
-  'clear blacklist': function(test) {
+  'clear blocklist': function(test) {
     wordfilter.clearList();
 
     test.expect(2);
-    test.equal(wordfilter.blacklisted('this string contains the word skank'), false, 'list is now empty so false');
+    test.equal(wordfilter.blocklisted('this string contains the word skank'), false, 'list is now empty so false');
 
     wordfilter.addWords(['skank']);
-    test.equal(wordfilter.blacklisted('this string contains the word skank'), true, 'skank was re-added so true');
+    test.equal(wordfilter.blocklisted('this string contains the word skank'), true, 'skank was re-added so true');
 
     test.done();
   }
