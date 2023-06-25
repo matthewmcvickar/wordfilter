@@ -7,18 +7,18 @@ Install the module with: `npm install wordfilter`
 
 ```javascript
 var wordfilter = require('wordfilter');
-wordfilter.blacklisted('does this string have a bad word in it?'); // "false"
+wordfilter.blocklisted('does this string have a bad word in it?'); // "false"
 
 // clear the list entirely
 wordfilter.clearList();
 
 // add new words
 wordfilter.addWords(['zebra','elephant']);
-wordfilter.blacklisted('this string has zebra in it'); // "true"
+wordfilter.blocklisted('this string has zebra in it'); // "true"
 
 // remove a word
 wordfilter.removeWord('zebra');
-wordfilter.blacklisted('this string has zebra in it'); // "false"
+wordfilter.blocklisted('this string has zebra in it'); // "false"
 ```
 
 Or with Python:
@@ -27,14 +27,14 @@ Install the module with: `pip install wordfilter`
 ```python
 from wordfilter import Wordfilter
 wordfilter = Wordfilter()
-wordfilter.blacklisted('does this string have a bad word in it?')  # False
+wordfilter.blocklisted('does this string have a bad word in it?')  # False
 
 # clear the list entirely
 wordfilter.clearList()
 
 # add new words
 wordfilter.addWords(['zebra','elephant'])
-wordfilter.blacklisted('this string has zebra in it')  # True
+wordfilter.blocklisted('this string has zebra in it')  # True
 ```
 
 ## Documentation
@@ -44,7 +44,7 @@ The list is not all-inclusive, and I'm always adding words to it. If you'd like 
 
 Words are case insensitive.
 
-Also note that due to the complexities of the English language, I am considering anything containing the substring of a bad word to be blacklisted. For example, even though "homogenous" is not a bad word, it contains the substring "homo" and it gets filtered. The reason for this is that new slang pops up all the time using compound words and I can't possibly keep up with it. I'm willing to lose a few words like "homogenous" and "Pakistan" in order to avoid false negatives.
+Also note that due to the complexities of the English language, I am considering anything containing the substring of a bad word to be blocklisted. For example, even though "homogenous" is not a bad word, it contains the substring "homo" and it gets filtered. The reason for this is that new slang pops up all the time using compound words and I can't possibly keep up with it. I'm willing to lose a few words like "homogenous" and "Pakistan" in order to avoid false negatives.
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
