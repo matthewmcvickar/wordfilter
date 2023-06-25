@@ -2,6 +2,7 @@ import os
 import json
 from warnings import warn
 
+
 class Wordfilter:
     def __init__(self):
         # json is in same directory as this class, given by __location__.
@@ -15,7 +16,9 @@ class Wordfilter:
         return any(badword in test_string for badword in self.blocklist)
 
     def blacklisted(self, string):
-        warn('The name of this function has changed to `blocklisted`. Please update your code accordingly.', DeprecationWarning, stacklevel=2)
+        warn('The name of this function has changed to `blocklisted`.\
+             Please update your code accordingly.',
+             DeprecationWarning, stacklevel=2)
         return self.blocklisted(self, string)
 
     def addWords(self, words):
