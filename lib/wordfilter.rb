@@ -2,37 +2,42 @@ require 'json'
 
 module Wordfilter
 	BadWordsFileName = File.dirname(__FILE__) + "/badwords.json";
-	@@blacklist = nil
-	
+	@@blocklist = nil
+
 	def self.init_first_time
-		return if(!@@blacklist.nil?)
+		return if(!@@blocklist.nil?)
 		self.init
 	end
-	
+
 	def self.init
 		badwords_file = File.read(BadWordsFileName);
-		@@blacklist = JSON.parse(badwords_file);
+		@@blocklist = JSON.parse(badwords_file);
 	end
-	
-	def self.blacklisted? string
+
+	def self.blocklisted? string
 		self.init_first_time
-		
+
 		string_to_test = string.downcase
-		@@blacklist.map!{|badword| badword.downcase}
-		
-		@@blacklist.each{|word|
+		@@blocklist.map!{|badword| badword.downcase}
+
+		@@blocklist.each{|word|
 			return true if string_to_test.include? word
 		}
-		
+
 		return false
 	end
-	
+
+  def self.blacklisted? string
+    warn "The name of this function has changed to `blocklisted`. Please update your code accordingly."
+    blacklisted(string)
+  end
+
 	def self.add_words words
 		self.init_first_time
-		@@blacklist += words
+		@@blocklist += words
 	end
-	
+
 	def self.clear_list
-		@@blacklist = []
+		@@blocklist = []
 	end
 end
